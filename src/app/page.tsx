@@ -49,6 +49,21 @@ const translations = {
 
     footer_company: "Company",
     footer_contact: "Contact",
+
+    // Added to satisfy TypeScript for bilingual product/service labels
+    prod_bearings: "Bearings & Power Transmission",
+    prod_fasteners: "Fasteners & Hardware",
+    prod_pneumatics: "Pneumatics & Hydraulics",
+    prod_electrical: "Electrical & Control",
+    prod_tools: "Tools & Safety",
+    prod_misc: "Consumables & Misc.",
+
+    serv_mro: "MRO Supply",
+    serv_mro_desc: "Reliable sourcing for maintenance, repair, and operations; genuine parts and alternates.",
+    serv_proc: "Procurement & Sourcing",
+    serv_proc_desc: "Local + international procurement, cross-brand matching, and hard-to-find items.",
+    serv_sched: "Scheduled Deliveries",
+    serv_sched_desc: "Flexible delivery schedules and blanket orders to keep your lines running.",
   },
   th: {
     nav_about: "เกี่ยวกับเรา",
