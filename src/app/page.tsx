@@ -12,7 +12,62 @@ import { Mail, Phone, ArrowRight, Building2, Shield, Zap, Users, Factory, Wrench
 // Brand: black / white / red accents
 
 // --- Simple i18n (EN/TH) ---
-const translations = {
+// Strong types so TS knows every key exists for both locales
+type Translation = {
+  nav_about: string;
+  nav_products: string;
+  nav_services: string;
+  nav_industries: string;
+  nav_brands: string;
+  nav_contact: string;
+  nav_quote: string;
+
+  hero_title: string;
+  hero_sub: string;
+  cta_quote: string;
+  cta_browse: string;
+  hero_trust: string;
+
+  why_title: string;
+  why_sub: string;
+
+  products_title: string;
+  products_sub: string;
+
+  services_title: string;
+  services_sub: string;
+
+  industries_title: string;
+  industries_sub: string;
+
+  brands_title: string;
+  brands_sub: string;
+
+  contact_title: string;
+  contact_sub: string;
+  contact_send: string;
+
+  footer_company: string;
+  footer_contact: string;
+
+  // Product categories
+  prod_bearings: string;
+  prod_fasteners: string;
+  prod_pneumatics: string;
+  prod_electrical: string;
+  prod_tools: string;
+  prod_misc: string;
+
+  // Services
+  serv_mro: string;
+  serv_mro_desc: string;
+  serv_proc: string;
+  serv_proc_desc: string;
+  serv_sched: string;
+  serv_sched_desc: string;
+};
+
+const translations: Record<"en" | "th", Translation> = {
   en: {
     nav_about: "About",
     nav_products: "Products",
@@ -50,7 +105,7 @@ const translations = {
     footer_company: "Company",
     footer_contact: "Contact",
 
-    // Added to satisfy TypeScript for bilingual product/service labels
+    // Product categories (EN)
     prod_bearings: "Bearings & Power Transmission",
     prod_fasteners: "Fasteners & Hardware",
     prod_pneumatics: "Pneumatics & Hydraulics",
@@ -58,6 +113,7 @@ const translations = {
     prod_tools: "Tools & Safety",
     prod_misc: "Consumables & Misc.",
 
+    // Services (EN)
     serv_mro: "MRO Supply",
     serv_mro_desc: "Reliable sourcing for maintenance, repair, and operations; genuine parts and alternates.",
     serv_proc: "Procurement & Sourcing",
@@ -245,19 +301,19 @@ export default function STNWebsite() {
   const T = translations[lang];
 
   const productCategories = [
-    { title: lang === 'en' ? "Bearings & Power Transmission" : T.prod_bearings, items: ["Ball/Roller Bearings", "Belts & Pulleys", "Chains & Sprockets", "Couplings"] },
-    { title: lang === 'en' ? "Fasteners & Hardware" : T.prod_fasteners, items: ["Bolts/Nuts/Washers", "Anchors", "Rivets", "Threaded Rod"] },
-    { title: lang === 'en' ? "Pneumatics & Hydraulics" : T.prod_pneumatics, items: ["Cylinders", "Valves", "Fittings", "Hoses"] },
-    { title: lang === 'en' ? "Electrical & Control" : T.prod_electrical, items: ["Sensors", "Switches", "Cables", "Motors", "VFDs"] },
-    { title: lang === 'en' ? "Tools & Safety" : T.prod_tools, items: ["Hand/Power Tools", "Measurement", "PPE", "Lockout/Tagout"] },
-    { title: lang === 'en' ? "Consumables & Misc." : T.prod_misc, items: ["Sealants", "Lubricants", "Tapes", "Abrasives"] },
-  ];
+  { title: T.prod_bearings, items: ["Ball/Roller Bearings", "Belts & Pulleys", "Chains & Sprockets", "Couplings"] },
+  { title: T.prod_fasteners, items: ["Bolts/Nuts/Washers", "Anchors", "Rivets", "Threaded Rod"] },
+  { title: T.prod_pneumatics, items: ["Cylinders", "Valves", "Fittings", "Hoses"] },
+  { title: T.prod_electrical, items: ["Sensors", "Switches", "Cables", "Motors", "VFDs"] },
+  { title: T.prod_tools, items: ["Hand/Power Tools", "Measurement", "PPE", "Lockout/Tagout"] },
+  { title: T.prod_misc, items: ["Sealants", "Lubricants", "Tapes", "Abrasives"] },
+];
 
   const services = [
-    { title: lang === 'en' ? "MRO Supply" : T.serv_mro, desc: lang === 'en' ? "Reliable sourcing for maintenance, repair, and operations; genuine parts and alternates." : T.serv_mro_desc },
-    { title: lang === 'en' ? "Procurement & Sourcing" : T.serv_proc, desc: lang === 'en' ? "Local + international procurement, cross-brand matching, and hard-to-find items." : T.serv_proc_desc },
-    { title: lang === 'en' ? "Scheduled Deliveries" : T.serv_sched, desc: lang === 'en' ? "Flexible delivery schedules and blanket orders to keep your lines running." : T.serv_sched_desc },
-  ];
+  { title: T.serv_mro, desc: T.serv_mro_desc },
+  { title: T.serv_proc, desc: T.serv_proc_desc },
+  { title: T.serv_sched, desc: T.serv_sched_desc },
+];
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-red-50/20 text-slate-900">
