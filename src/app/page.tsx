@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Mail, Phone, ArrowRight, Building2, Shield, Zap, Users, Factory, Wrench } from "lucide-react";
+import { Mail, Phone, ArrowRight, Building2, Shield, Zap, Users, Factory, Wrench, MessageSquare, Search, FileText, Truck, CheckCircle2 } from "lucide-react";
 
 // STN PRO SUPPLY LIMITED PARTNERSHIP — Company Website (EN/TH)
 // Tailwind + shadcn/ui + framer-motion. Drop into Next.js/React app as a page component.
@@ -21,6 +21,7 @@ type Translation = {
   nav_brands: string;
   nav_contact: string;
   nav_quote: string;
+  nav_stnflow: string;
 
   hero_title: string;
   hero_sub: string;
@@ -65,6 +66,25 @@ type Translation = {
   serv_proc_desc: string;
   serv_sched: string;
   serv_sched_desc: string;
+
+  // STNflow process section
+  stnflow_title: string;
+  stnflow_sub: string;
+  stnflow_step1_title: string;
+  stnflow_step1_desc: string;
+  stnflow_step2_title: string;
+  stnflow_step2_desc: string;
+  stnflow_step3_title: string;
+  stnflow_step3_desc: string;
+  stnflow_step4_title: string;
+  stnflow_step4_desc: string;
+  stnflow_step5_title: string;
+  stnflow_step5_desc: string;
+  stnflow_why_title: string;
+  stnflow_why_1: string;
+  stnflow_why_2: string;
+  stnflow_why_3: string;
+  stnflow_why_4: string;
 };
 
 const translations: Record<"en" | "th", Translation> = {
@@ -76,6 +96,7 @@ const translations: Record<"en" | "th", Translation> = {
     nav_brands: "Brands",
     nav_contact: "Contact",
     nav_quote: "Get a quote",
+    nav_stnflow: "Process",
 
     hero_title: "Industrial trading partner for maintenance parts & hardware",
     hero_sub: "We source and deliver the parts factories rely on—fast, reliable, and cost-effective.",
@@ -120,6 +141,25 @@ const translations: Record<"en" | "th", Translation> = {
     serv_proc_desc: "Local + international procurement, cross-brand matching, and hard-to-find items.",
     serv_sched: "Scheduled Deliveries",
     serv_sched_desc: "Flexible delivery schedules and blanket orders to keep your lines running.",
+
+    // STNflow process (EN)
+    stnflow_title: "STNflow — A Reliable Process, From First Request to the Shop Floor",
+    stnflow_sub: "We designed every step to be fast and traceable, so your line spends less time waiting.",
+    stnflow_step1_title: "Request",
+    stnflow_step1_desc: "Send part names, specs, or photos—our team helps identify replacements if the original is discontinued.",
+    stnflow_step2_title: "Source & Compare",
+    stnflow_step2_desc: "We check pricing and stock across 60+ partner brands, with alternatives ready for urgent needs.",
+    stnflow_step3_title: "Digital Quote",
+    stnflow_step3_desc: "Get your quote as a link via STNflow—open and download the PDF instantly, no waiting on email attachments.",
+    stnflow_step4_title: "Delivery",
+    stnflow_step4_desc: "Scheduled or urgent delivery, with blanket orders available for recurring items.",
+    stnflow_step5_title: "Follow-up & Planning",
+    stnflow_step5_desc: "We check in after delivery and help you plan ahead for your next stock cycle.",
+    stnflow_why_title: "Why Choose STN",
+    stnflow_why_1: "One-stop MRO—no need to coordinate with multiple suppliers.",
+    stnflow_why_2: "Trusted brands—with alternatives ready when stock runs out.",
+    stnflow_why_3: "Transparent at every step—through our STNflow digital document system.",
+    stnflow_why_4: "Fast response—less downtime for your production line.",
   },
   th: {
     nav_about: "เกี่ยวกับเรา",
@@ -129,6 +169,7 @@ const translations: Record<"en" | "th", Translation> = {
     nav_brands: "แบรนด์",
     nav_contact: "ติดต่อ",
     nav_quote: "ขอใบเสนอราคา",
+    nav_stnflow: "กระบวนการ",
 
     hero_title: "พันธมิตรด้านการจัดหาชิ้นส่วนซ่อมบำรุงและฮาร์ดแวร์สำหรับโรงงาน",
     hero_sub: "จัดหาและส่งมอบชิ้นส่วนที่โรงงานต้องใช้—รวดเร็ว เชื่อถือได้ และคุ้มค่า",
@@ -173,6 +214,25 @@ const translations: Record<"en" | "th", Translation> = {
     serv_proc_desc: "จัดซื้อทั้งในประเทศและต่างประเทศ จับคู่ข้ามแบรนด์ และหาสินค้าที่หายาก",
     serv_sched: "การส่งมอบตามกำหนด",
     serv_sched_desc: "กำหนดรอบการส่งมอบและสัญญาจัดซื้อเพื่อให้สายการผลิตไม่หยุดชะงัก",
+
+    // STNflow process (TH)
+    stnflow_title: "STNflow — กระบวนการจัดหาที่ไว้ใจได้ ตั้งแต่คำขอแรกจนถึงหน้างาน",
+    stnflow_sub: "เราออกแบบทุกขั้นตอนให้เร็วและตรวจสอบได้ ลดเวลาที่สายการผลิตของคุณต้องหยุดรอ",
+    stnflow_step1_title: "รับคำขอ",
+    stnflow_step1_desc: "รับสเปก ชื่อชิ้นส่วน หรือรูปภาพจากลูกค้า พร้อมทีมงานช่วยระบุรุ่นทดแทนหากของเดิมเลิกผลิต",
+    stnflow_step2_title: "จัดหาและเทียบราคา",
+    stnflow_step2_desc: "ตรวจสอบราคาและสต็อกจากเครือข่ายแบรนด์กว่า 60 แบรนด์ พร้อมทางเลือกในกรณีเร่งด่วน",
+    stnflow_step3_title: "ส่งใบเสนอราคาแบบดิจิทัล",
+    stnflow_step3_desc: "ส่งใบเสนอราคาเป็นลิงก์ผ่านระบบ STNflow เปิดดูและดาวน์โหลด PDF ได้ทันทีจากมือถือหรือคอมพิวเตอร์ ไม่ต้องรอไฟล์แนบอีเมล",
+    stnflow_step4_title: "จัดส่ง",
+    stnflow_step4_desc: "จัดส่งตามกำหนดหรือแบบเร่งด่วน รองรับคำสั่งซื้อแบบต่อเนื่อง (blanket order) สำหรับของใช้ประจำ",
+    stnflow_step5_title: "ติดตามผลและวางแผนล่วงหน้า",
+    stnflow_step5_desc: "ทีมงานติดตามผลหลังส่งมอบ พร้อมให้คำแนะนำเพื่อวางแผนสต็อกครั้งถัดไป",
+    stnflow_why_title: "ทำไมต้องเลือก STN",
+    stnflow_why_1: "ครบในที่เดียว—ไม่ต้องประสานงานกับซัพพลายเออร์หลายเจ้า",
+    stnflow_why_2: "แบรนด์ที่ไว้ใจ—พร้อมทางเลือกเมื่อของขาดตลาด",
+    stnflow_why_3: "โปร่งใสทุกขั้นตอน—ผ่านระบบเอกสารดิจิทัล STNflow",
+    stnflow_why_4: "ตอบสนองเร็ว—ลดเวลาหยุดสายการผลิต",
   },
 };
 
@@ -328,6 +388,7 @@ export default function STNWebsite() {
             <a href="#about" className="hover:text-slate-700">{T.nav_about}</a>
             <a href="#products" className="hover:text-slate-700">{T.nav_products}</a>
             <a href="#services" className="hover:text-slate-700">{T.nav_services}</a>
+            <a href="#stnflow" className="hover:text-slate-700">{T.nav_stnflow}</a>
             <a href="#industries" className="hover:text-slate-700">{T.nav_industries}</a>
             <a href="#brands" className="hover:text-slate-700">{T.nav_brands}</a>
             <a href="#contact" className="hover:text-slate-700">{T.nav_contact}</a>
@@ -435,6 +496,44 @@ export default function STNWebsite() {
         </div>
       </section>
 
+      {/* STNflow Process */}
+      <section id="stnflow" className="bg-white border-y">
+        <div className="max-w-6xl mx-auto px-4 py-16 md:py-20">
+          <div className="text-center mb-10">
+            <h2 className="text-3xl md:text-4xl font-bold tracking-tight">{T.stnflow_title}</h2>
+            <p className="mt-3 text-slate-600">{T.stnflow_sub}</p>
+          </div>
+          <div className="grid md:grid-cols-5 gap-6">
+            {[
+              { icon: <MessageSquare className="w-6 h-6" />, title: T.stnflow_step1_title, desc: T.stnflow_step1_desc },
+              { icon: <Search className="w-6 h-6" />, title: T.stnflow_step2_title, desc: T.stnflow_step2_desc },
+              { icon: <FileText className="w-6 h-6" />, title: T.stnflow_step3_title, desc: T.stnflow_step3_desc },
+              { icon: <Truck className="w-6 h-6" />, title: T.stnflow_step4_title, desc: T.stnflow_step4_desc },
+              { icon: <CheckCircle2 className="w-6 h-6" />, title: T.stnflow_step5_title, desc: T.stnflow_step5_desc },
+            ].map((step, i) => (
+              <Card key={i} className="rounded-2xl shadow-sm">
+                <CardHeader className="flex flex-row items-center gap-3">
+                  <div className="p-2 rounded-xl bg-red-50">{step.icon}</div>
+                  <CardTitle className="text-base">{step.title}</CardTitle>
+                </CardHeader>
+                <CardContent className="text-slate-600 text-sm">{step.desc}</CardContent>
+              </Card>
+            ))}
+          </div>
+          <div className="mt-10 rounded-2xl bg-slate-50 p-6 md:p-8">
+            <h3 className="text-xl font-semibold mb-4 text-center">{T.stnflow_why_title}</h3>
+            <div className="grid sm:grid-cols-2 gap-3 max-w-3xl mx-auto">
+              {[T.stnflow_why_1, T.stnflow_why_2, T.stnflow_why_3, T.stnflow_why_4].map((w, i) => (
+                <div key={i} className="flex items-start gap-2 text-slate-700">
+                  <CheckCircle2 className="w-5 h-5 text-red-600 shrink-0 mt-0.5" />
+                  <span>{w}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Industries */}
       <section id="industries" className="bg-white border-y">
         <div className="max-w-6xl mx-auto px-4 py-16 md:py-20">
@@ -526,6 +625,7 @@ export default function STNWebsite() {
               <li><a href="#about" className="hover:text-slate-800">{T.nav_about}</a></li>
               <li><a href="#products" className="hover:text-slate-800">{T.nav_products}</a></li>
               <li><a href="#services" className="hover:text-slate-800">{T.nav_services}</a></li>
+              <li><a href="#stnflow" className="hover:text-slate-800">{T.nav_stnflow}</a></li>
               <li><a href="#brands" className="hover:text-slate-800">{T.nav_brands}</a></li>
               <li><a href="#contact" className="hover:text-slate-800">{T.nav_contact}</a></li>
             </ul>
