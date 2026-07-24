@@ -357,6 +357,15 @@ const brandGroups: { title: string; brands: { name: string; logo: string }[] }[]
   },
 ];
 
+const trustedBrandLogos = [
+  "abb", "ari-armaturen", "arita", "burkert", "carlo-gavazzi", "crane", "danfoss",
+  "endress-hauser", "fag", "festo", "fyh", "harting", "hirose", "ifm", "ina",
+  "keyence", "leuze", "martin", "mitsubishi", "mueller", "nsk", "ntn", "omron",
+  "optibelt", "oriental-motor", "panasonic", "pepperl-fuchs", "phoenix-contact",
+  "pilz", "schneider", "sick", "siemens", "skf", "smc", "thk", "timken",
+  "tsubaki", "vishay", "wago", "wika", "yaskawa",
+];
+
 export default function STNWebsite() {
   const [lang, setLang] = useState<Lang>("en");
   const T = translations[lang];
@@ -438,6 +447,19 @@ export default function STNWebsite() {
               </div>
             </div>
           </motion.div>
+
+          <div className="mt-14 md:mt-20 relative overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">
+            <div className="flex w-max gap-12 items-center animate-marquee-ltr">
+              {[...trustedBrandLogos, ...trustedBrandLogos].map((slug, i) => (
+                <img
+                  key={`${slug}-${i}`}
+                  src={`/logos/${slug}.png`}
+                  alt={slug}
+                  className="h-8 md:h-10 w-auto object-contain opacity-70 grayscale hover:grayscale-0 hover:opacity-100 transition-all"
+                />
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
