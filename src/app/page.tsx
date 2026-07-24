@@ -415,7 +415,7 @@ export default function STNWebsite() {
 
       {/* Hero */}
       <section className="relative overflow-hidden">
-        <div className="max-w-6xl mx-auto px-4 py-20 md:py-28">
+        <div className="max-w-6xl mx-auto px-4 pt-20 md:pt-28 pb-8 md:pb-10">
           <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="grid md:grid-cols-2 gap-10 items-center">
             <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1, duration: 0.6 }} className="relative order-2 md:order-1">
               <div className="aspect-[4/3] rounded-2xl bg-white shadow-xl ring-1 ring-black/5 overflow-hidden">
@@ -448,8 +448,8 @@ export default function STNWebsite() {
             </div>
           </motion.div>
 
-          <div className="mt-14 md:mt-20 relative overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">
-            <div className="flex w-max gap-12 items-center animate-marquee-ltr">
+          <div className="mt-10 md:mt-14 relative overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">
+            <div className="flex w-max gap-12 items-center animate-marquee-rtl">
               {[...trustedBrandLogos, ...trustedBrandLogos].map((slug, i) => (
                 <img
                   key={`${slug}-${i}`}
@@ -464,7 +464,7 @@ export default function STNWebsite() {
       </section>
 
       {/* Features */}
-      <section id="about" className="max-w-6xl mx-auto px-4 py-16 md:py-20">
+      <section id="about" className="max-w-6xl mx-auto px-4 pt-4 md:pt-6 pb-16 md:pb-20">
         <div className="text-center mb-10">
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight">{T.why_title}</h2>
           <p className="mt-3 text-slate-600">{T.why_sub}</p>
@@ -664,6 +664,7 @@ export default function STNWebsite() {
               <li>084-293-5519</li>
               <li>stnprosupply@gmail.com</li>
               <li>LINE ID: @stnprosupply</li>
+              <li>LINE: Tophunk</li>
               <li>อาคารลุมพินีวิลล์ ตึกบี 2 ชั้น 7 เลขที่ 599/97 ถ.ประชาอุทิศ แขวงสามเสนนอก เขตห้วยขวาง กทม. 10310</li>
             </ul>
           </div>

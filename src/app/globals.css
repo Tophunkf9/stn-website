@@ -121,15 +121,15 @@
   }
 }
 
-@keyframes marquee-ltr {
+@keyframes marquee-rtl {
   from {
-    transform: translateX(-50%);
+    transform: translateX(0%);
   }
   to {
-    transform: translateX(0%);
+    transform: translateX(-50%);
   }
 }
 
-.animate-marquee-ltr {
-  animation: marquee-ltr 100s linear infinite;
+.animate-marquee-rtl {
+  animation: marquee-rtl 100s linear infinite;
 }
