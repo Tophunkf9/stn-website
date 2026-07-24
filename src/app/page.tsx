@@ -663,7 +663,8 @@ export default function STNWebsite() {
             <ul className="space-y-2 text-slate-600">
               <li>084-293-5519</li>
               <li>stnprosupply@gmail.com</li>
-              <li>Bangkok, Thailand</li>
+              <li>LINE ID: @stnprosupply</li>
+              <li>อาคารลุมพินีวิลล์ ตึกบี 2 ชั้น 7 เลขที่ 599/97 ถ.ประชาอุทิศ แขวงสามเสนนอก เขตห้วยขวาง กทม. 10310</li>
             </ul>
           </div>
         </div>
