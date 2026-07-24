@@ -455,7 +455,7 @@ export default function STNWebsite() {
                   key={`${slug}-${i}`}
                   src={`/logos/${slug}.png`}
                   alt={slug}
-                  className="h-8 md:h-10 w-auto object-contain opacity-70 grayscale hover:grayscale-0 hover:opacity-100 transition-all"
+                  className="h-12 md:h-16 w-auto object-contain opacity-70 grayscale hover:grayscale-0 hover:opacity-100 transition-all"
                 />
               ))}
             </div>
