@@ -408,7 +408,20 @@ export default function STNWebsite() {
       <section className="relative overflow-hidden">
         <div className="max-w-6xl mx-auto px-4 py-20 md:py-28">
           <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="grid md:grid-cols-2 gap-10 items-center">
-            <div>
+            <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1, duration: 0.6 }} className="relative order-2 md:order-1">
+              <div className="aspect-[4/3] rounded-2xl bg-white shadow-xl ring-1 ring-black/5 overflow-hidden">
+                <Image
+                  src="/hero-parts.jpg"
+                  alt="STN Pro Supply — industrial MRO parts including bearings, fasteners, pneumatics, and electrical components"
+                  width={1600}
+                  height={1194}
+                  priority
+                  className="h-full w-full object-cover"
+                />
+              </div>
+              <div className="absolute -bottom-6 -right-6 w-40 h-40 bg-red-200/40 rounded-full blur-2xl -z-10" />
+            </motion.div>
+            <div className="order-1 md:order-2">
               <h1 className="text-4xl md:text-6xl font-bold tracking-tight leading-[1.1]">
                 {T.hero_title}
               </h1>
@@ -424,19 +437,6 @@ export default function STNWebsite() {
                 <span className="text-sm">{T.hero_trust}</span>
               </div>
             </div>
-            <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1, duration: 0.6 }} className="relative">
-              <div className="aspect-[4/3] rounded-2xl bg-white shadow-xl ring-1 ring-black/5 overflow-hidden">
-                <Image
-                  src="/hero-parts.jpg"
-                  alt="STN Pro Supply — industrial MRO parts including bearings, fasteners, pneumatics, and electrical components"
-                  width={1600}
-                  height={1194}
-                  priority
-                  className="h-full w-full object-cover"
-                />
-              </div>
-              <div className="absolute -bottom-6 -right-6 w-40 h-40 bg-red-200/40 rounded-full blur-2xl -z-10" />
-            </motion.div>
           </motion.div>
         </div>
       </section>
