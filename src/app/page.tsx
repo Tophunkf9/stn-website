@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -424,12 +425,17 @@ export default function STNWebsite() {
               </div>
             </div>
             <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1, duration: 0.6 }} className="relative">
-              <div className="aspect-[4/3] rounded-2xl bg-white shadow-xl ring-1 ring-black/5 p-6 grid gap-4">
-                <div className="rounded-xl bg-gradient-to-br from-slate-100 to-slate-50 h-full w-full grid place-content-center text-center">
-                  <p className="text-slate-700">Place STN logo here</p>
-                </div>
+              <div className="aspect-[4/3] rounded-2xl bg-white shadow-xl ring-1 ring-black/5 overflow-hidden">
+                <Image
+                  src="/hero-parts.jpg"
+                  alt="STN Pro Supply — industrial MRO parts including bearings, fasteners, pneumatics, and electrical components"
+                  width={1600}
+                  height={1194}
+                  priority
+                  className="h-full w-full object-cover"
+                />
               </div>
-              <div className="absolute -bottom-6 -right-6 w-40 h-40 bg-red-200/40 rounded-full blur-2xl" />
+              <div className="absolute -bottom-6 -right-6 w-40 h-40 bg-red-200/40 rounded-full blur-2xl -z-10" />
             </motion.div>
           </motion.div>
         </div>
