@@ -26,6 +26,7 @@ import {
   MapPin,
   Menu,
   X,
+  ChevronDown,
 } from "lucide-react";
 import { translations, type Lang } from "@/lib/i18n";
 import { brandGroups } from "@/lib/brand-groups";
@@ -68,6 +69,7 @@ export default function STNSite({ lang }: { lang: Lang }) {
 
   const [form, setForm] = useState({ name: "", email: "", company: "", phone: "", message: "" });
   const [menuOpen, setMenuOpen] = useState(false);
+  const [openBrandGroups, setOpenBrandGroups] = useState<number[]>([]);
   const address = lang === "th" ? ADDRESS_TH : ADDRESS_EN;
 
   const navItems = [
@@ -437,29 +439,59 @@ export default function STNSite({ lang }: { lang: Lang }) {
             <h2 className="text-3xl md:text-4xl font-bold tracking-tight">{T.brands_title}</h2>
             <p className="mt-3 text-slate-600">{T.brands_sub}</p>
           </div>
-          <div className="space-y-12">
-            {brandGroups.map((group, gi) => (
-              <div key={gi}>
-                <h3 className="text-xl font-semibold mb-4">{T[group.titleKey] as string}</h3>
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6">
-                  {group.brands.map((b, i) => (
-                    <div
-                      key={i}
-                      className="rounded-xl border p-4 text-center shadow-sm hover:shadow transition flex flex-col items-center justify-center bg-white"
-                    >
-                      {b.logo ? (
-                        <img src={b.logo} alt={`${b.name} logo`} className="max-h-12 object-contain mb-2" />
-                      ) : (
-                        <span className="mb-2 h-12 flex items-center justify-center text-lg font-semibold tracking-wide text-slate-700">
-                          {b.name}
-                        </span>
-                      )}
-                      <span className="text-sm font-medium text-slate-800">{b.name}</span>
-                    </div>
-                  ))}
+          <div className="space-y-3 md:space-y-12">
+            {brandGroups.map((group, gi) => {
+              const open = openBrandGroups.includes(gi);
+              return (
+                <div key={gi} className="rounded-xl border md:border-0 bg-white">
+                  {/* Mobile: tap to expand. Desktop (md+): always open, header is plain text. */}
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setOpenBrandGroups((g) => (g.includes(gi) ? g.filter((x) => x !== gi) : [...g, gi]))
+                    }
+                    aria-expanded={open}
+                    className="w-full flex items-center justify-between gap-3 px-4 py-3 md:px-0 md:py-0 md:mb-4 text-left md:pointer-events-none"
+                  >
+                    <h3 className="text-base md:text-xl font-semibold">
+                      {T[group.titleKey] as string}
+                      <span className="ml-2 text-sm font-normal text-slate-500">({group.brands.length})</span>
+                    </h3>
+                    <ChevronDown
+                      className={`w-5 h-5 shrink-0 text-slate-500 transition-transform md:hidden ${open ? "rotate-180" : ""}`}
+                    />
+                  </button>
+                  <div
+                    className={`${open ? "grid" : "hidden"} md:grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-2 md:gap-6 px-3 pb-3 md:p-0`}
+                  >
+                    {group.brands.map((b, i) => (
+                      <div
+                        key={i}
+                        className="rounded-lg md:rounded-xl border p-2 md:p-4 text-center shadow-sm hover:shadow transition flex flex-col items-center justify-center bg-white min-h-16 md:min-h-28"
+                      >
+                        {b.logo ? (
+                          <>
+                            <img
+                              src={b.logo}
+                              alt={`${b.name} logo`}
+                              loading="lazy"
+                              className="max-h-8 md:max-h-12 max-w-full object-contain mb-1 md:mb-2"
+                            />
+                            <span className="text-[11px] md:text-sm font-medium text-slate-800 leading-tight">
+                              {b.name}
+                            </span>
+                          </>
+                        ) : (
+                          <span className="text-xs md:text-lg font-semibold tracking-wide text-slate-700 leading-tight break-words">
+                            {b.name}
+                          </span>
+                        )}
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
