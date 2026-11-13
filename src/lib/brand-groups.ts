@@ -1,0 +1,123 @@
+// Brand groups rendered in the Key Brands section.
+// `logo` is null where the logo file is not in /public/logos yet — the card falls back to a text chip
+// instead of showing a broken image.
+import type { Translation } from "@/lib/i18n";
+
+export type BrandGroup = { titleKey: keyof Translation; brands: { name: string; logo: string | null }[] };
+
+export const brandGroups: BrandGroup[] = [
+  {
+    titleKey: "bg_automation",
+    brands: [
+      { name: "OMRON", logo: "/logos/omron.png" },
+      { name: "SIEMENS", logo: "/logos/siemens.png" },
+      { name: "Mitsubishi", logo: "/logos/mitsubishi.png" },
+      { name: "Panasonic", logo: "/logos/panasonic.png" },
+      { name: "IFM", logo: "/logos/ifm.png" },
+      { name: "PILZ", logo: "/logos/pilz.png" },
+      { name: "Pepperl+Fuchs", logo: "/logos/pepperl-fuchs.png" },
+      { name: "SCHNEIDER ELECTRIC", logo: "/logos/schneider.png" },
+      { name: "ABB", logo: "/logos/abb.png" },
+      { name: "Phoenix Contact", logo: "/logos/phoenix-contact.png" },
+      { name: "SICK", logo: "/logos/sick.png" },
+      { name: "Keyence", logo: "/logos/keyence.png" },
+      { name: "Balluff", logo: null },
+      { name: "Autonics", logo: null },
+      { name: "Leuze", logo: "/logos/leuze.png" },
+      { name: "Turck", logo: null },
+      { name: "IDEC", logo: null },
+      { name: "HARTING", logo: "/logos/harting.png" },
+      { name: "HIROSE ELECTRIC", logo: "/logos/hirose.png" },
+      { name: "WAGO", logo: "/logos/wago.png" },
+      { name: "ORIENTAL MOTOR", logo: "/logos/oriental-motor.png" },
+      { name: "Carlo Gavazzi", logo: "/logos/carlo-gavazzi.png" },
+      { name: "DANFOSS", logo: "/logos/danfoss.png" },
+      { name: "FUJI ELECTRIC", logo: null },
+      { name: "VISHAY", logo: "/logos/vishay.png" },
+    ],
+  },
+  {
+    titleKey: "bg_pneumatics",
+    brands: [
+      { name: "AirTAC", logo: null },
+      { name: "SMC", logo: "/logos/smc.png" },
+      { name: "NORGREN", logo: null },
+      { name: "FESTO", logo: "/logos/festo.png" },
+      { name: "SECOH", logo: null },
+      { name: "HIBLOW", logo: null },
+    ],
+  },
+  {
+    titleKey: "bg_bearings",
+    brands: [
+      { name: "FAG", logo: "/logos/fag.png" },
+      { name: "NSK", logo: "/logos/nsk.png" },
+      { name: "NTN", logo: "/logos/ntn.png" },
+      { name: "SKF", logo: "/logos/skf.png" },
+      { name: "TIMKEN", logo: "/logos/timken.png" },
+      { name: "IKO", logo: null },
+      { name: "INA", logo: "/logos/ina.png" },
+      { name: "FYH", logo: "/logos/fyh.png" },
+      { name: "MCGILL", logo: null },
+      { name: "THK", logo: "/logos/thk.png" },
+      { name: "GATES", logo: null },
+      { name: "optibelt", logo: "/logos/optibelt.png" },
+      { name: "BANDO", logo: null },
+      { name: "MITSUBOSHI", logo: null },
+      { name: "TSUBAKI", logo: "/logos/tsubaki.png" },
+      { name: "KANA", logo: null },
+      { name: "SEALMASTER", logo: null },
+      { name: "Martin", logo: "/logos/martin.png" },
+      { name: "FLEXCO", logo: null },
+    ],
+  },
+  {
+    titleKey: "bg_valves",
+    brands: [
+      { name: "ARI-Armaturen", logo: "/logos/ari-armaturen.png" },
+      { name: "ARITA", logo: "/logos/arita.png" },
+      { name: "ASAHI", logo: null },
+      { name: "KITZ", logo: null },
+      { name: "CRANE", logo: "/logos/crane.png" },
+      { name: "BURKERT", logo: "/logos/burkert.png" },
+      { name: "MUELLER", logo: "/logos/mueller.png" },
+      { name: "NIBCO", logo: null },
+      { name: "SPIREX SARCO", logo: null },
+    ],
+  },
+  {
+    titleKey: "bg_instrumentation",
+    brands: [
+      { name: "Endress + Hauser", logo: "/logos/endress-hauser.png" },
+      { name: "WIKA", logo: "/logos/wika.png" },
+      { name: "WINTERS", logo: null },
+      { name: "NUOVA FIMA", logo: null },
+      { name: "WATANABE", logo: null },
+      { name: "SATO", logo: null },
+      { name: "VAQUA", logo: null },
+      { name: "HC", logo: null },
+    ],
+  },
+  {
+    titleKey: "bg_electrical",
+    brands: [
+      { name: "HARTING", logo: "/logos/harting.png" },
+      { name: "HIROSE ELECTRIC", logo: "/logos/hirose.png" },
+      { name: "WAGO", logo: "/logos/wago.png" },
+      { name: "VISHAY", logo: "/logos/vishay.png" },
+    ],
+  },
+  {
+    titleKey: "bg_tools",
+    brands: [
+      { name: "KENNEDY", logo: null },
+      { name: "MATLOCK", logo: null },
+      { name: "KOKEN", logo: null },
+      { name: "THOR HAMMER", logo: null },
+      { name: "SENATOR", logo: null },
+      { name: "BOTT", logo: null },
+      { name: "YAMOTO", logo: null },
+      { name: "YASKAWA", logo: "/logos/yaskawa.png" },
+    ],
+  },
+];
