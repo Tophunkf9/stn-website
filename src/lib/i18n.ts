@@ -265,7 +265,7 @@ export const translations: Record<Lang, Translation> = {
     form_phone: "Phone",
     form_message: "List parts, brands, specs, quantities",
 
-    address_label: "Address (TH):",
+    address_label: "Address:",
     footer_company: "Company",
     footer_contact: "Contact",
     footer_blurb:
@@ -410,7 +410,7 @@ export const translations: Record<Lang, Translation> = {
     form_phone: "โทรศัพท์",
     form_message: "ระบุรายการ อะไหล่ แบรนด์ สเปก จำนวน",
 
-    address_label: "ที่อยู่ (ไทย):",
+    address_label: "ที่อยู่:",
     footer_company: "เกี่ยวกับบริษัท",
     footer_contact: "ติดต่อ",
     footer_blurb: "บริษัทค้าส่งชิ้นส่วนซ่อมบำรุง ฮาร์ดแวร์ เครื่องมือ และวัสดุสิ้นเปลืองสำหรับโรงงาน",
@@ -547,7 +547,7 @@ export const translations: Record<Lang, Translation> = {
     form_phone: "电话",
     form_message: "请列出零件、品牌、规格与数量",
 
-    address_label: "地址（泰国）：",
+    address_label: "地址：",
     footer_company: "公司",
     footer_contact: "联系方式",
     footer_blurb: "工业维修零部件、五金、工具及 MRO 用品贸易公司。",

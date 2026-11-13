@@ -24,14 +24,29 @@ import {
   Truck,
   CheckCircle2,
   MapPin,
+  Menu,
+  X,
 } from "lucide-react";
 import { translations, type Lang } from "@/lib/i18n";
 import { brandGroups } from "@/lib/brand-groups";
 
 const ADDRESS_TH =
   "อาคารลุมพินีวิลล์ ตึกบี 2 ชั้น 7 เลขที่ 599/97 ถ.ประชาอุทิศ แขวงสามเสนนอก เขตห้วยขวาง กทม. 10310";
+const ADDRESS_EN =
+  "599/97 Lumphini Ville, Building B 2, 7th Floor, Pracha Uthit Rd., Samsen Nok, Huai Khwang, Bangkok 10310, Thailand";
 const EMAIL = "stnprosupply@gmail.com";
 const PHONE = "084-293-5519";
+const PHONE_TEL = "tel:+66842935519";
+const LINE_ID = "@stnprosupply";
+const LINE_URL = "https://line.me/R/ti/p/@stnprosupply";
+
+function LineIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className={className}>
+      <path d="M12 2.5C6.48 2.5 2 6.12 2 10.58c0 4 3.55 7.35 8.35 7.98.33.07.77.22.88.5.1.25.07.65.03.9l-.14.86c-.04.25-.2 1 .88.54 1.08-.45 5.82-3.43 7.94-5.87C21.4 13.9 22 12.32 22 10.58 22 6.12 17.52 2.5 12 2.5Z" />
+    </svg>
+  );
+}
 
 const trustedBrandLogos = [
   "abb", "ari-armaturen", "arita", "burkert", "carlo-gavazzi", "crane", "danfoss",
@@ -43,7 +58,7 @@ const trustedBrandLogos = [
 ];
 
 const langLinks: { code: Lang; href: string; label: string }[] = [
-  { code: "en", href: "/", label: "EN" },
+  { code: "en", href: "/en", label: "EN" },
   { code: "th", href: "/th", label: "TH" },
   { code: "zh", href: "/zh", label: "中文" },
 ];
@@ -53,6 +68,19 @@ export default function STNSite({ lang }: { lang: Lang }) {
 
   const [form, setForm] = useState({ name: "", email: "", company: "", phone: "", message: "" });
   const [sent, setSent] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const address = lang === "th" ? ADDRESS_TH : ADDRESS_EN;
+
+  const navItems = [
+    { href: "#about", label: T.nav_about },
+    { href: "#products", label: T.nav_products },
+    { href: "#services", label: T.nav_services },
+    { href: "#stnflow", label: T.nav_stnflow },
+    { href: "#industries", label: T.nav_industries },
+    { href: "#coverage", label: T.nav_coverage },
+    { href: "#brands", label: T.nav_brands },
+    { href: "#contact", label: T.nav_contact },
+  ];
 
   const productCategories = [
     { title: T.prod_bearings, items: T.prod_bearings_items },
@@ -90,24 +118,19 @@ export default function STNSite({ lang }: { lang: Lang }) {
     <div className="min-h-screen bg-gradient-to-b from-white to-red-50/20 text-slate-900">
       {/* Nav */}
       <header className="sticky top-0 z-50 bg-white/80 backdrop-blur border-b">
-        <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
+        <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-2 sm:gap-3">
           <div className="flex items-center gap-2">
             <Building2 className="w-6 h-6 shrink-0" />
-            <span className="font-semibold tracking-tight text-sm md:text-base whitespace-nowrap">
+            <span className="font-semibold tracking-tight text-[13px] sm:text-sm md:text-base whitespace-nowrap">
               STN PRO SUPPLY
             </span>
           </div>
           <nav className="hidden lg:flex items-center gap-4 text-[13px]">
-            <a href="#about" className="hover:text-slate-700">{T.nav_about}</a>
-            <a href="#products" className="hover:text-slate-700">{T.nav_products}</a>
-            <a href="#services" className="hover:text-slate-700">{T.nav_services}</a>
-            <a href="#stnflow" className="hover:text-slate-700">{T.nav_stnflow}</a>
-            <a href="#industries" className="hover:text-slate-700">{T.nav_industries}</a>
-            <a href="#coverage" className="hover:text-slate-700">{T.nav_coverage}</a>
-            <a href="#brands" className="hover:text-slate-700">{T.nav_brands}</a>
-            <a href="#contact" className="hover:text-slate-700">{T.nav_contact}</a>
+            {navItems.map((n) => (
+              <a key={n.href} href={n.href} className="hover:text-slate-700">{n.label}</a>
+            ))}
           </nav>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5 sm:gap-2">
             <div className="flex items-center gap-1">
               {langLinks.map((l) => (
                 <Link
@@ -115,7 +138,7 @@ export default function STNSite({ lang }: { lang: Lang }) {
                   href={l.href}
                   hrefLang={l.code === "zh" ? "zh-CN" : l.code}
                   aria-current={lang === l.code ? "true" : undefined}
-                  className={`inline-flex h-8 items-center rounded-md border px-2 text-sm whitespace-nowrap ${
+                  className={`inline-flex h-8 items-center rounded-md border px-1.5 sm:px-2 text-xs sm:text-sm whitespace-nowrap ${
                     lang === l.code ? "ring-1 ring-slate-400 bg-slate-50" : "hover:bg-slate-50"
                   }`}
                 >
@@ -123,11 +146,47 @@ export default function STNSite({ lang }: { lang: Lang }) {
                 </Link>
               ))}
             </div>
-            <Button asChild className="bg-red-600 hover:bg-red-700 text-white">
+            <Button asChild className="hidden sm:inline-flex bg-red-600 hover:bg-red-700 text-white">
               <a href="#contact">{T.nav_quote}</a>
             </Button>
+            <button
+              type="button"
+              onClick={() => setMenuOpen((o) => !o)}
+              aria-expanded={menuOpen}
+              aria-controls="mobile-menu"
+              aria-label="Menu"
+              className="lg:hidden inline-flex h-8 w-8 items-center justify-center rounded-md border hover:bg-slate-50"
+            >
+              {menuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
+            </button>
           </div>
         </div>
+        {menuOpen && (
+          <nav id="mobile-menu" className="lg:hidden border-t bg-white">
+            <div className="max-w-6xl mx-auto px-4 py-3 grid gap-1">
+              {navItems.map((n) => (
+                <a
+                  key={n.href}
+                  href={n.href}
+                  onClick={() => setMenuOpen(false)}
+                  className="rounded-md px-2 py-2 text-[15px] hover:bg-slate-50"
+                >
+                  {n.label}
+                </a>
+              ))}
+              <div className="mt-2 grid grid-cols-2 gap-2">
+                <Button asChild className="bg-red-600 hover:bg-red-700 text-white">
+                  <a href="#contact" onClick={() => setMenuOpen(false)}>{T.nav_quote}</a>
+                </Button>
+                <Button asChild className="bg-[#06C755] hover:bg-[#05b34c] text-white">
+                  <a href={LINE_URL} target="_blank" rel="noopener noreferrer">
+                    <LineIcon className="w-4 h-4 mr-1" /> LINE
+                  </a>
+                </Button>
+              </div>
+            </div>
+          </nav>
+        )}
       </header>
 
       {/* Hero */}
@@ -448,20 +507,25 @@ export default function STNSite({ lang }: { lang: Lang }) {
                   {T.contact_send}
                   <ArrowRight className="w-4 h-4 ml-1 transition-transform group-hover:translate-x-0.5" />
                 </Button>
-                <div className="flex items-center gap-4 text-slate-500 text-sm">
-                  <span className="inline-flex items-center gap-1">
-                    <Mail className="w-4 h-4" /> {EMAIL}
-                  </span>
-                  <span className="inline-flex items-center gap-1">
-                    <Phone className="w-4 h-4" /> {PHONE}
-                  </span>
-                </div>
+                <Button asChild className="bg-[#06C755] hover:bg-[#05b34c] text-white">
+                  <a href={LINE_URL} target="_blank" rel="noopener noreferrer">
+                    <LineIcon className="w-4 h-4 mr-1" /> LINE {LINE_ID}
+                  </a>
+                </Button>
+              </div>
+              <div className="flex items-center gap-x-4 gap-y-1 flex-wrap text-slate-600 text-sm">
+                <a href={`mailto:${EMAIL}`} className="inline-flex items-center gap-1 hover:text-slate-900">
+                  <Mail className="w-4 h-4" /> {EMAIL}
+                </a>
+                <a href={PHONE_TEL} className="inline-flex items-center gap-1 hover:text-slate-900 whitespace-nowrap">
+                  <Phone className="w-4 h-4" /> {PHONE}
+                </a>
               </div>
               {sent && <p className="text-sm text-slate-600">{T.contact_sent}</p>}
             </form>
             <div className="mt-6 text-sm text-slate-600">
               <p>
-                <strong>{T.address_label}</strong> {ADDRESS_TH}
+                <strong>{T.address_label}</strong> {address}
               </p>
             </div>
           </CardContent>
@@ -494,11 +558,14 @@ export default function STNSite({ lang }: { lang: Lang }) {
           <div>
             <p className="font-medium mb-2">{T.footer_contact}</p>
             <ul className="space-y-2 text-slate-600">
-              <li>{PHONE}</li>
-              <li>{EMAIL}</li>
-              <li>LINE ID: @stnprosupply</li>
-              <li>LINE: Tophunk</li>
-              <li>{ADDRESS_TH}</li>
+              <li><a href={PHONE_TEL} className="hover:text-slate-800">{PHONE}</a></li>
+              <li><a href={`mailto:${EMAIL}`} className="hover:text-slate-800">{EMAIL}</a></li>
+              <li>
+                <a href={LINE_URL} target="_blank" rel="noopener noreferrer" className="hover:text-slate-800">
+                  LINE: {LINE_ID}
+                </a>
+              </li>
+              <li>{address}</li>
             </ul>
           </div>
         </div>
@@ -506,6 +573,17 @@ export default function STNSite({ lang }: { lang: Lang }) {
           © {new Date().getFullYear()} STN PRO SUPPLY LIMITED PARTNERSHIP. {T.footer_rights}
         </div>
       </footer>
+      {/* Floating LINE button */}
+      <a
+        href={LINE_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={`LINE ${LINE_ID}`}
+        className="fixed bottom-4 right-4 z-50 inline-flex items-center gap-2 rounded-full bg-[#06C755] px-4 py-3 text-white shadow-lg hover:bg-[#05b34c]"
+      >
+        <LineIcon className="w-5 h-5" />
+        <span className="text-sm font-semibold">LINE</span>
+      </a>
     </div>
   );
 }
