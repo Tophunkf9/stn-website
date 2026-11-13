@@ -30,6 +30,7 @@ import {
 } from "lucide-react";
 import { translations, type Lang } from "@/lib/i18n";
 import { brandGroups } from "@/lib/brand-groups";
+import { track } from "@/components/analytics";
 
 const ADDRESS_TH =
   "อาคารลุมพินีวิลล์ ตึกบี 2 ชั้น 7 เลขที่ 599/97 ถ.ประชาอุทิศ แขวงสามเสนนอก เขตห้วยขวาง กทม. 10310";
@@ -142,6 +143,7 @@ export default function STNSite({ lang }: { lang: Lang }) {
       const data = (await res.json().catch(() => ({}))) as { success?: string | boolean };
       if (!res.ok || String(data.success) !== "true") throw new Error("send failed");
       setStatus("sent");
+      track("generate_lead", { method: "quote_form", language: lang });
       setForm({ name: "", email: "", company: "", phone: "", message: "" });
     } catch {
       setStatus("error");
@@ -226,7 +228,7 @@ export default function STNSite({ lang }: { lang: Lang }) {
 
       {/* Hero */}
       <section className="relative overflow-hidden">
-        <div className="max-w-6xl mx-auto px-4 pt-20 md:pt-28 pb-8 md:pb-10">
+        <div className="max-w-6xl mx-auto px-4 pt-6 md:pt-28 pb-8 md:pb-10">
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
