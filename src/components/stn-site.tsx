@@ -67,7 +67,6 @@ export default function STNSite({ lang }: { lang: Lang }) {
   const T = translations[lang];
 
   const [form, setForm] = useState({ name: "", email: "", company: "", phone: "", message: "" });
-  const [sent, setSent] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const address = lang === "th" ? ADDRESS_TH : ADDRESS_EN;
 
@@ -97,10 +96,15 @@ export default function STNSite({ lang }: { lang: Lang }) {
     { title: T.serv_sched, desc: T.serv_sched_desc },
   ];
 
-  // ponytail: mailto keeps the form working with zero backend. Swap to Formspree/Resend
-  // if leads need to land in a mailbox/CMS instead of the visitor's email client.
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  // Each request goes out two ways: emailed to EMAIL via FormSubmit (no backend or API key;
+  // the first submission sends a one-time activation link to EMAIL), and LINE opens with the
+  // same text pre-filled to @stnprosupply. If the email call fails we fall back to mailto.
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const [lineHref, setLineHref] = useState(LINE_URL);
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    if (status === "sending") return;
     const subject = `Quote request — ${form.company || form.name || "Website"}`;
     const body = [
       `${T.form_name}: ${form.name}`,
@@ -110,8 +114,37 @@ export default function STNSite({ lang }: { lang: Lang }) {
       "",
       form.message,
     ].join("\n");
-    window.location.href = `mailto:${EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    setSent(true);
+
+    // Open LINE synchronously inside the submit handler so popup blockers allow it.
+    const lineUrl = `https://line.me/R/oaMessage/${LINE_ID}/?${encodeURIComponent(`${subject}\n\n${body}`)}`;
+    setLineHref(lineUrl);
+    window.open(lineUrl, "_blank", "noopener,noreferrer");
+
+    setStatus("sending");
+    try {
+      const res = await fetch(`https://formsubmit.co/ajax/${EMAIL}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          _subject: subject,
+          _template: "table",
+          _captcha: "false",
+          name: form.name,
+          email: form.email,
+          company: form.company,
+          phone: form.phone,
+          message: form.message,
+          language: lang,
+        }),
+      });
+      const data = (await res.json().catch(() => ({}))) as { success?: string | boolean };
+      if (!res.ok || String(data.success) !== "true") throw new Error("send failed");
+      setStatus("sent");
+      setForm({ name: "", email: "", company: "", phone: "", message: "" });
+    } catch {
+      setStatus("error");
+      window.location.href = `mailto:${EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    }
   }
 
   return (
@@ -503,8 +536,12 @@ export default function STNSite({ lang }: { lang: Lang }) {
                 onChange={(e) => setForm({ ...form, message: e.target.value })}
               />
               <div className="flex items-center gap-3 flex-wrap">
-                <Button type="submit" className="group bg-red-600 hover:bg-red-700 text-white">
-                  {T.contact_send}
+                <Button
+                  type="submit"
+                  disabled={status === "sending"}
+                  className="group bg-red-600 hover:bg-red-700 text-white"
+                >
+                  {status === "sending" ? T.contact_sending : T.contact_send}
                   <ArrowRight className="w-4 h-4 ml-1 transition-transform group-hover:translate-x-0.5" />
                 </Button>
                 <Button asChild className="bg-[#06C755] hover:bg-[#05b34c] text-white">
@@ -521,7 +558,24 @@ export default function STNSite({ lang }: { lang: Lang }) {
                   <Phone className="w-4 h-4" /> {PHONE}
                 </a>
               </div>
-              {sent && <p className="text-sm text-slate-600">{T.contact_sent}</p>}
+              {(status === "sent" || status === "error") && (
+                <div
+                  role="status"
+                  className={`rounded-lg p-3 text-sm ${
+                    status === "sent" ? "bg-green-50 text-green-800" : "bg-amber-50 text-amber-800"
+                  }`}
+                >
+                  <p>{status === "sent" ? T.contact_sent : T.contact_error}</p>
+                  <a
+                    href={lineHref}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-2 inline-flex items-center gap-1 font-semibold text-[#06a447] underline"
+                  >
+                    <LineIcon className="w-4 h-4" /> {T.contact_line_again}
+                  </a>
+                </div>
+              )}
             </form>
             <div className="mt-6 text-sm text-slate-600">
               <p>

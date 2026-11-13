@@ -101,6 +101,9 @@ export type Translation = {
   contact_sub: string;
   contact_send: string;
   contact_sent: string;
+  contact_sending: string;
+  contact_error: string;
+  contact_line_again: string;
 
   form_name: string;
   form_email: string;
@@ -257,7 +260,10 @@ export const translations: Record<Lang, Translation> = {
     contact_sub:
       "Tell us what you need (part names, specs, brands, quantities) and we’ll reply quickly with options.",
     contact_send: "Send request",
-    contact_sent: "Your email app should now open with the request filled in. If it doesn’t, email us at stnprosupply@gmail.com.",
+    contact_sent: "Thanks! Your request has been emailed to our team, and LINE has opened with the same request — just tap send. We usually reply within one business day.",
+    contact_sending: "Sending…",
+    contact_error: "We couldn’t send the email automatically. Your email app will open instead — or contact us on LINE @stnprosupply.",
+    contact_line_again: "Send via LINE",
 
     form_name: "Your name",
     form_email: "Email",
@@ -401,8 +407,10 @@ export const translations: Record<Lang, Translation> = {
     contact_title: "ติดต่อ STN",
     contact_sub: "ระบุรายการที่ต้องการ (ชื่ออะไหล่ สเปก แบรนด์ ปริมาณ) แล้วเราจะตอบกลับอย่างรวดเร็ว",
     contact_send: "ส่งคำขอ",
-    contact_sent:
-      "โปรแกรมอีเมลของคุณจะเปิดขึ้นพร้อมรายละเอียดคำขอ หากไม่เปิด กรุณาอีเมลมาที่ stnprosupply@gmail.com",
+    contact_sent: "ขอบคุณครับ ส่งคำขอทางอีเมลถึงทีมงานแล้ว และเปิด LINE พร้อมข้อความเดียวกันไว้ให้ — กดส่งใน LINE ได้เลย ปกติเราตอบกลับภายใน 1 วันทำการ",
+    contact_sending: "กำลังส่ง…",
+    contact_error: "ส่งอีเมลอัตโนมัติไม่สำเร็จ ระบบจะเปิดแอปอีเมลให้แทน หรือติดต่อทาง LINE @stnprosupply",
+    contact_line_again: "ส่งทาง LINE",
 
     form_name: "ชื่อของคุณ",
     form_email: "อีเมล",
@@ -539,7 +547,10 @@ export const translations: Record<Lang, Translation> = {
     contact_title: "联系 STN",
     contact_sub: "请告知所需产品（名称、规格、品牌、数量），我们会尽快回复方案。",
     contact_send: "发送询价",
-    contact_sent: "邮件程序已打开并填好询价内容；若未打开，请直接发邮件至 stnprosupply@gmail.com。",
+    contact_sent: "谢谢！询价已通过邮件发送给我们的团队，LINE 也已打开并填好相同内容——点击发送即可。我们通常在一个工作日内回复。",
+    contact_sending: "发送中…",
+    contact_error: "邮件自动发送失败，将改为打开您的邮件程序；也可通过 LINE @stnprosupply 联系我们。",
+    contact_line_again: "通过 LINE 发送",
 
     form_name: "您的姓名",
     form_email: "邮箱",
